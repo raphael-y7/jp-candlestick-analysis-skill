@@ -232,6 +232,9 @@ This repository publishes distilled skills, indexes and rule quick references on
 
 All numeric criteria in the books (shadow multiples, consecutive new-high counts, disparity thresholds, moving-average parameters, etc.) are case- and experience-based rules without statistical backtesting; test them on your own instruments and declare the convention you use. Nothing in this repository is investment advice.
 
+
+This project is released under the MIT license, which permits free use, modification and redistribution, including commercial use. If you intend to use it in a commercial product or a paid service, please contact the author first to describe your use case — this is the author's request, not an additional condition on top of the MIT license.
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
