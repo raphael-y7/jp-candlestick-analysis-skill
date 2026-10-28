@@ -222,10 +222,9 @@ Ask: "Where should the stop go for this stock, and how do I compute the risk-rew
 
 ## Sources
 
-- *Japanese Candlestick Charting Techniques (2nd Edition)* by Steve Nison, translated by Ding Shengyuan
-- *The New Japanese Candlestick Charting Techniques* by Steve Nison, translated by Liang Chaoqun and Chen Hui
+- *Japanese Candlestick Charting Techniques* by Steve Nison
+- *The New Japanese Candlestick Charting Techniques* by Steve Nison
 - Distilled from both books together, producing 27 capability cards
-- Roughly 60% of the original examples are US equities and 40% US futures/forex (1990–1994); there is not a single A-share example. This skill pack prioritizes A-share scenarios, and every place affected by T+1, price limits or call auctions carries an adaptation note
 
 ## Notice
 
