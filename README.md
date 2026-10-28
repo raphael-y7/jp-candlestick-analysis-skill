@@ -1,6 +1,6 @@
-# 日本蜡烛图技术 Skill
+<h1 align="center">日本蜡烛图技术 Skill</h1>
 
-中文 | [English](README.en.md)
+<p align="center">中文 | <a href="README.en.md">English</a></p>
 
 一套可直接使用的 AI skill 工具包——把史蒂夫·尼森《日本蜡烛图技术（第二版）》与《日本蜡烛图技术新解》两本书中的 K 线判读方法，蒸馏成 27 张可单独触发、也可组合调用的能力卡。
 

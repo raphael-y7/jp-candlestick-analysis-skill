@@ -1,6 +1,6 @@
-# Japanese Candlestick Charting Skill
+<h1 align="center">Japanese Candlestick Charting Skill</h1>
 
-[中文](README.md) | English
+<p align="center"><a href="README.md">中文</a> | English</p>
 
 An AI skill pack for immediate use — it distills the candlestick reading methods from Steve Nison's *Japanese Candlestick Charting Techniques (2nd Edition)* and *The New Japanese Candlestick Charting Techniques* into 27 capability cards that can be triggered individually or combined.
 
