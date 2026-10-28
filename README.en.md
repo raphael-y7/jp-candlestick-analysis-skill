@@ -4,7 +4,7 @@
 
 An AI skill pack for immediate use — it distills the candlestick reading methods from Steve Nison's *Japanese Candlestick Charting Techniques (2nd Edition)* and *The New Japanese Candlestick Charting Techniques* into 27 capability cards that can be triggered individually or combined.
 
-This is not a summary page for a book. The books are the source of these skills, not the star of the homepage.
+It is not a book summary, nor a reading response — it breaks the reusable methodology in the books into skill modules that can be triggered, executed and tested.
 
 ## What these skills solve
 
