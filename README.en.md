@@ -2,7 +2,7 @@
 
 <p align="center"><a href="README.md">中文</a> | English</p>
 
-An AI skill pack for immediate use — it distills the candlestick reading methods from Steve Nison's *Japanese Candlestick Charting Techniques (2nd Edition)* and *The New Japanese Candlestick Charting Techniques* into 27 capability cards that can be triggered individually or combined.
+An AI skill pack for immediate use — it distills the candlestick reading methods from Steve Nison's *Japanese Candlestick Charting Techniques* and *The New Japanese Candlestick Charting Techniques* into 27 capability cards that can be triggered individually or combined.
 
 It is not a book summary, nor a reading response — it breaks the reusable methodology in the books into skill modules that can be triggered, executed and tested.
 
@@ -17,15 +17,17 @@ It is not a book summary, nor a reading response — it breaks the reusable meth
 
 ## What was distilled
 
-27 capability cards, organized in the order "pass the gates first, read the chart second, do the math last":
+27 capability cards, organized in the order "pass the gates first, read the chart second, do the math last". The slugs below map one-to-one onto the 27 capabilities in `bundle/verified.yaml` (the `-skill` suffix is part of the canonical slug):
 
-- **Decision gates**: `signal-context-filter` (location and context filtering), `signal-confluence` (mutual confirmation and signal clustering), `stop-reward-risk` (stop placement and risk-reward calculation)
-- **Reading foundations**: `data-quality-confirmation-gate` (data quality and confirmation conventions), `single-candle-reading` (single-candle state reading and opening-price leads), `volume-confirmation` (volume verification and the accumulation/distribution matrix)
-- **Reversal patterns**: `umbrella-line-family` (hammer, hanging man, shooting star, inverted hammer), `two-line-reversal` (engulfing, dark cloud cover, piercing), `star-family` (morning star, evening star, abandoned baby, tri-star), `doji-context` (doji context and action tiers), `harami-secondary-reversals` (harami family and secondary reversal signals), `long-term-patterns` (head and shoulders, triple top, rounding bottom)
-- **Continuation patterns and location**: `continuation-patterns` (three white soldiers, rising three methods, pause patterns), `window-gap-management` (window/gap assessment and support management), `support-resistance-system` (support and resistance with false-breakout reversals), `ma-verification` (moving averages and the "MA × candlestick" verification discipline), `divergence-index` (disparity index and high/low price zones), `oscillator-confirmation` (RSI, stochastic and MACD two-stage verification), `new-high-count` (consecutive new highs and overbought/oversold alerts)
-- **Execution and discipline**: `price-target-retracement` (percentage retracements and price targets), `discipline-falsification` (the DISCIPLINE checklist and falsifiable plans), `nonstandard-synthetic-candle` (non-standard pattern handling and synthetic candles)
-- **New price charts** (from *The New Japanese Candlestick Charting Techniques*): `three-line-break-chart`, `renko-chart`, `kagi-chart` (the only usable charting option for off-exchange fund NAVs), `new-chart-pipeline` (splitting direction-finding from entry timing)
-- **Meta rules**: `news-reaction-sourcing` (checking market reaction to news and two-source verification)
+- **Decision gates** (3): `signal-context-filter` (location and context filtering), `signal-confluence` (mutual confirmation and signal clustering), `stop-reward-risk-skill` (stop placement and risk-reward calculation)
+- **Reading foundations** (3): `data-quality-confirmation-gate` (data quality and confirmation conventions), `single-candle-reading` (single-candle state reading and opening-price leads), `volume-confirmation` (volume verification and the accumulation/distribution matrix)
+- **Reversal patterns** (6): `umbrella-line-family` (hammer, hanging man, shooting star, inverted hammer), `two-line-reversal` (engulfing, dark cloud cover, piercing, with strength tiers and two market conventions), `star-family` (morning star, evening star, abandoned baby, tri-star), `doji-context` (doji context and action tiers), `harami-secondary-reversals` (harami family and secondary reversal signals), `long-term-patterns` (head and shoulders, triple top, rounding bottom)
+- **Continuation patterns and location** (7): `continuation-patterns` (three white soldiers, rising three methods, pause patterns), `window-gap-management-skill` (window/gap assessment and support management), `support-resistance-system-skill` (support and resistance with false-breakout reversals), `ma-verification` (moving averages and the "MA × candlestick" verification discipline), `divergence-index` (disparity index and high/low price zones), `oscillator-confirmation` (RSI, stochastic and MACD two-stage verification), `new-high-count` (consecutive new highs and overbought/oversold alerts)
+- **Execution and discipline** (3): `price-target-retracement-skill` (percentage retracements and price targets), `discipline-falsification` (the DISCIPLINE checklist and falsifiable plans), `nonstandard-synthetic-candle` (non-standard pattern handling and synthetic candles)
+- **New price charts** (4): `three-line-break-chart`, `renko-chart`, `kagi-chart-skill` (the only usable charting option for off-exchange fund NAVs), `new-chart-pipeline` (splitting direction-finding from entry timing)
+- **Meta rules** (1): `news-reaction-sourcing` (checking market reaction to news and two-source verification)
+
+That is 3 + 3 + 6 + 7 + 3 + 4 + 1 = 27 cards. Every card's full criteria, source quotations, in-book cases, trigger scenarios, executable steps and boundaries live in the matching file under `bundle/cards/`.
 
 ## Two packaging modes: single and pack
 
@@ -34,7 +36,7 @@ The same 27 capability cards are compiled twice, at two granularities. The conte
 | | single (one entry) | pack (compact pack, multiple entries) |
 |---|---|---|
 | Discoverable entries | **1**: `jp-candlestick-analysis-skill` | **6**: one source router + 5 promoted standalone skills |
-| Where the 27 cards live | All inside the entry's `references/capabilities/`, loaded 1–2 at a time by the router table | 5 high-frequency cards become standalone skills; the other 22 stay in the router's `references/` |
+| Where the 27 cards live | All inside the entry's `references/capabilities/`, loaded 1–2 at a time by the router table | The 5 high-frequency cards embed the whole card (sections R / I / A1 / A2 / E / B) in their own `SKILL.md`; the other 22 live only in the router's `references/` |
 | Triggering | Only the entry description participates in matching; routing happens after entry | The 5 high-frequency capabilities are matched directly, one hop fewer |
 | Upgrades | Replace 1 directory | Replace 6 directories |
 
@@ -69,14 +71,14 @@ Pick by the way you work, and **install only one**:
 
 **How the skill reasons**
 
-- First `data-quality-confirmation-gate`: verify the data vendor provides a real opening price (if the open is always identical to the previous close, the gap information is already gone and the reading must be downgraded)
-- Then `umbrella-line-family`: a small body at the top of the range with a long lower shadow after a decline is a hammer; hammers do not require next-day confirmation
+- First `data-quality-confirmation-gate`: verify the data vendor provides a real opening price — if the "open" always equals the previous close, the gap information is already gone and the reading must stop and change source
+- Then `umbrella-line-family`: check the three shape criteria one by one — body at the upper end of the range (colour irrelevant), lower shadow reaching the body-height multiple, no or very short upper shadow; after a decline it is named a hammer, and hammers do not require next-day confirmation
 - Then `signal-context-filter`: is it sitting on support, or is it a continuation of the decline? Is it against the primary trend?
-- Finally `stop-reward-risk`: put the stop below the low of the lower shadow and compute the risk-reward ratio
+- Finally `stop-reward-risk-skill`: the stop is objectively given by the pattern (below the low of this candle, judged on closing prices), the target must be supplied by a Western tool, and only then is the ratio computed
 
 **Sample answer**
 
-> Do not call it a hammer yet. Confirm two things first: whether the opening price is a real opening price, and whether this candle sits on actual support. If both hold, it is a hammer — and a hammer does not need next-day confirmation. But a hammer only says "the decline may stop", not "it will rise now", so the action is not to buy with full size. Declare the shadow multiple first: the two books disagree (the main text says at least 2×, the glossary says 2–3×, *The New* says 3× or more). Write down which value you use this round, otherwise you will recognize the same shape inconsistently. Then do the math with `stop-reward-risk`: stop below the low of the shadow, and measure the room to the nearest resistance above. Note the book never gives a pass line for the ratio (no 2:1 or 3:1 reference), so you must set that threshold yourself and put it in the plan. Under A-share T+1 you can take a probe position overnight and add only after the next close clears the body of this candle.
+> Do not call it a hammer yet. Two things need confirming first: whether the opening price is a real opening price, and whether this candle sits on actual support. If both hold, it is a hammer — and a hammer does not need next-day confirmation (only hanging men and inverted hammers do). But a hammer only says "the decline may stop", not "it will rise now", so the action is not to buy with full size. Also declare the shadow multiple first: the two books disagree (the main text says at least 2×, the glossary says 2–3×, *The New* says 3× or more). Write down which value you use this round, otherwise you will recognize the same shape inconsistently. Then do the math with `stop-reward-risk-skill`: the stop goes below the low of this candle and is only confirmed by a close beyond it; the target must come from support/resistance or a retracement level, never from a gut feeling. The Walmart hammer in the book is exactly this comparison — buying at the close risked about 5 dollars, while waiting for the next day's pullback to the low end shrank the risk noticeably; but the author also warns that the market often does not pull back, so weigh both options beforehand. One more thing: the book never gives a pass line for the ratio (no 2:1 or 3:1 reference), so you must set that threshold yourself and put it in the plan.
 
 ### Example 2: a gap that has not been filled for three days — should I chase?
 
@@ -86,14 +88,14 @@ Pick by the way you work, and **install only one**:
 
 **How the skill reasons**
 
-- `window-gap-management`: classify the gap first (breakaway / runaway / exhaustion); the gap itself forms a support band
+- `window-gap-management-skill`: first run the A-share no-information-gap filter (gaps from trading halts, ex-rights/ex-dividend, call auction or limit-up/limit-down one-word bars must be removed or flagged), then decide whether it is a real window — the **shadows** of the two adjacent candles must not overlap; a body gap with overlapping shadows does not count, and a tiny gap of a few cents does
+- Registration: the whole window range is a support asset; the key support of an upward window is its bottom edge, and a window opened on huge volume is firmer
 - `signal-context-filter`: does this gap sit at the top of a long trading range, or at the end of an extended run?
-- `price-target-retracement`: measure upside room with box height or measured moves
-- `stop-reward-risk`: stop below the lower edge of the gap, and compare "chase now" against "wait for a pullback"
+- `price-target-retracement-skill` + `stop-reward-risk-skill`: measure upside room, set the stop, and compare "chase now" against "wait for a pullback"
 
 **Sample answer**
 
-> An unfilled gap only means "support is still there" — it is not a reason to buy. Classify it first: if the gap opened at the top of a long range on clearly expanded volume, it looks like a breakaway gap; if it is the third or fourth gap of an extended advance, it is more likely an exhaustion gap, and the correct action there is to reduce, not to chase. Assuming a breakaway gap, the support band is the gap's upper and lower edges, and the stop goes below the lower edge. Measure the target with box height or a measured move and compare it with the stop distance. Chasing now and waiting for a pullback to the upper edge of the gap use the same stop, but the pullback entry gives a clearly better ratio — so "three days unfilled" is not enough reason to give up waiting.
+> "Three days unfilled" only means support is still there — it is not a reason to buy. In the candlestick system a window is not a stretch of price vacuum but a support asset with a life cycle: first confirm the shadows really do not overlap, then register it as a range — the key support of an upward window is its bottom edge. A pullback into the window is the buy zone, and you do not need to wait for an exact price; the stop is pre-set as "a close below the bottom edge of the window". The real invalidation is a **close that seals the window**: an intraday break does not count, weekly charts use Friday's close, and sealing means the trend that opened the window has ended — that is when the long logic stops. As for "should I reverse after three gaps" — "three" is only a cultural reference marker; after three you take protective action, never an aggressive counter-trend trade, and you do not guess when the gap will be filled. Finally, measure the target with `price-target-retracement-skill` and compare chasing now against waiting for a pullback to the upper edge with `stop-reward-risk-skill`: both use the same stop, and the pullback entry gives a clearly better ratio.
 
 ## How these skills were generated
 
@@ -106,16 +108,16 @@ These skills were produced with the **[cangjie-skill](https://github.com/kangaro
 5. **Zettelkasten linking** — map dependencies, contrasts and combinations between cards, producing the capability index and routing table
 6. **Trigger and output testing** — write trigger blind tests (including decoy questions: fire when they should, stay silent when they should not) and output evaluation scenarios for every card; failing cards go back for rework and are re-verified afterwards
 
-The relationship between the two books also shapes the distillation: the 2nd edition is the main body (a pattern dictionary plus a multi-technique reference system), while *The New* is not a repeat — it revises some criteria (such as the "wide" definition for stock markets) and adds the disparity index plus three new price-chart types.
+The relationship between the two books also shapes the distillation: one is the main body (a pattern dictionary plus a multi-technique reference system), while *The New* is not a repeat — it revises some criteria (such as the "wide" definition for stock markets) and adds the disparity index plus three new price-chart types. The whole-book output is in `BOOK_OVERVIEW.md`, the triple-verification conclusions are in `verified.md`, and the canonical definitions are in `bundle/verified.yaml`.
 
 ## Testing and verification
 
-This repository publishes the test material from the generation process alongside the skills: every card ships with a `test-prompts.json` (trigger and boundary cases), `evals/` holds the output-evaluation tasks, assertions and blind-test records, and `test-results.md` is the item-by-item scoring log — including the failures and the rework, not just the passes.
+This repository publishes the test material from the generation process alongside the skills: `evals/` holds trigger cases for the six entries (`test-prompts__*.json`), the output-evaluation tasks and assertions (`output-tasks__*` / `output-assertions__*`), and the item-by-item scoring log `test-results.md` — including the failures and the rework, not just the passes.
 
 - **Trigger blind tests**: should_trigger 25 / 25, should_not_trigger 18 / 18; plus 18 edge cases — 15 passed directly, 2 were handled correctly by the entry, 1 was fixed and re-tested
-- **Output evaluation**: 27 units × normal / boundary = 54 scenarios. The first round scored 52 / 54; the two failures (Renko chart, Kagi chart) were fixed in the cards and passed on regression, ending at 54 / 54
+- **Output evaluation**: 27 units × normal / boundary = 54 scenarios. The first round scored 52 / 54 (252 / 255 assertions, 98.8%); the two failures (Renko chart, Kagi chart) were fixed in the cards and passed on regression, ending at 54 / 54
 - **Stop discipline**: all 38 judge_stop assertions passed — refusing when it should refuse, asking when it should ask, never forcing a conclusion
-- **No-skill control**: 5 same-question baselines run without the skill, honestly recording where the cards add only "moderate to limited" value
+- **No-skill control**: 5 same-question baselines run without the skill, honestly recording where the cards add only "moderate to limited" value (in the Kagi group the baseline even beat the card build on the first pass — direct evidence for the rework)
 
 ## Repository layout
 
@@ -126,11 +128,17 @@ jp-candlestick-analysis-skill/
 ├── LICENSE                        ← MIT
 ├── BOOK_OVERVIEW.md               ← whole-book comprehension (Adler four-step, stage 0 output)
 ├── verified.md                    ← triple-verification conclusions for the 27 canonical units
+├── INDEX.md                       ← skill map (capability table + dependencies + loading order)
+├── bundle/                        ← card source (single source of truth for this distillation)
+│   ├── verified.yaml              ← canonical definitions of the 27 capabilities (slug / criteria / destination)
+│   ├── cards/                     ← 27 capability cards, filenames all end with -skill.md
+│   └── book/
+│       ├── overview.md            ← whole-book overview
+│       └── glossary.md            ← glossary
 ├── single/                        ← single-entry build
 │   └── jp-candlestick-analysis-skill/
 │       ├── SKILL.md               ← entry: triggers + routing table + loading rules
 │       ├── BUILD_MANIFEST.json    ← build manifest and file hashes
-│       ├── test-prompts.json      ← entry-level trigger and boundary cases
 │       └── references/
 │           ├── overview.md        ← whole-book overview
 │           ├── capability-index.md  ← full intent and keyword index
@@ -142,31 +150,29 @@ jp-candlestick-analysis-skill/
 │   ├── capability-destinations.json
 │   ├── jp-candlestick-analysis-skill-router/
 │   │   ├── SKILL.md               ← source router entry
-│   │   └── references/            ← 27 cards + indexes, called by the router
+│   │   └── references/            ← 27 cards + index / cheatsheet / glossary / overview
 │   ├── stop-reward-risk-skill/
-│   │   ├── SKILL.md
-│   │   └── test-prompts.json
+│   │   └── SKILL.md               ← one file, the whole card
 │   ├── price-target-retracement-skill/
-│   │   ├── SKILL.md
-│   │   └── test-prompts.json
+│   │   └── SKILL.md
 │   ├── window-gap-management-skill/
-│   │   ├── SKILL.md
-│   │   └── test-prompts.json
+│   │   └── SKILL.md
 │   ├── support-resistance-system-skill/
-│   │   ├── SKILL.md
-│   │   └── test-prompts.json
+│   │   └── SKILL.md
 │   └── kagi-chart-skill/
-│       ├── SKILL.md
-│       └── test-prompts.json
-└── evals/                          ← output evaluation and blind-test records
+│       └── SKILL.md
+└── evals/                          ← test material from the generation process
     ├── test-results.md             ← item-by-item scoring and rework log
+    ├── test-prompts__jp-candlestick-analysis-skill.json
+    ├── test-prompts__stop-reward-risk.json
+    ├── test-prompts__price-target-retracement.json
+    ├── test-prompts__window-gap-management.json
+    ├── test-prompts__support-resistance-system.json
+    ├── test-prompts__kagi-chart-skill.json
     ├── output-tasks__C01-C14.json
     ├── output-tasks__C15-C27.json
     ├── output-assertions__C01-C14.json
     ├── output-assertions__C15-C27.json
-    ├── blind__kagi-chart__candlestick-analysis.json
-    ├── blind__stop-reward-risk__price-target-retracement.json
-    ├── blind__window-gap-management__support-resistance-system.json
     ├── all_skills_list.json
     └── router_cards_list.json
 ```
@@ -218,13 +224,12 @@ $dest = "$env:USERPROFILE\.agents\skills"
 
 ### How to verify the install
 
-Ask: "Where should the stop go for this stock, and how do I compute the risk-reward ratio?" If the agent enters the `stop-reward-risk` calculation flow instead of giving generic technical commentary, the install works. With the single build it reads the entry first and then routes to a card; with the pack build the matching capability is hit directly.
+Ask: "Where should the stop go for this stock, and how do I compute the risk-reward ratio?" If the agent enters the `stop-reward-risk-skill` calculation flow (stop objectively given by the pattern, target supplied by a Western tool, ratio computed before deciding) instead of giving generic technical commentary, the install works. With the single build it reads the entry first and then routes to a card; with the pack build the matching capability is hit directly.
 
 ## Sources
 
 - *Japanese Candlestick Charting Techniques* by Steve Nison
 - *The New Japanese Candlestick Charting Techniques* by Steve Nison
-- Distilled from both books together, producing 27 capability cards
 
 ## Notice
 
@@ -232,8 +237,6 @@ This repository publishes distilled skills, indexes and rule quick references on
 
 All numeric criteria in the books (shadow multiples, consecutive new-high counts, disparity thresholds, moving-average parameters, etc.) are case- and experience-based rules without statistical backtesting; test them on your own instruments and declare the convention you use. Nothing in this repository is investment advice.
 
-
 ## License
 
 [MIT](./LICENSE)
-
