@@ -35,7 +35,6 @@ The same 27 capability cards are compiled twice, at two granularities. The conte
 |---|---|---|
 | Discoverable entries | **1**: `jp-candlestick-analysis-skill` | **6**: one source router + 5 promoted standalone skills |
 | Where the 27 cards live | All inside the entry's `references/capabilities/`, loaded 1–2 at a time by the router table | 5 high-frequency cards become standalone skills; the other 22 stay in the router's `references/` |
-| Agent skill list | Grows by 1 | Grows by 6 |
 | Triggering | Only the entry description participates in matching; routing happens after entry | The 5 high-frequency capabilities are matched directly, one hop fewer |
 | Upgrades | Replace 1 directory | Replace 6 directories |
 
@@ -54,7 +53,6 @@ Pick by the way you work, and **install only one**:
 | How you work | Recommended | Why |
 |---|---|---|
 | You use DSH / Codex / Claude Code with a skills directory and want a clean list | single | Takes 1 slot, loses no capabilities |
-| Your agent has a skill budget (e.g. 8) or you already have many skills | single | pack takes 6 slots at once |
 | Your daily questions concentrate on "where is my stop / what is the target / will the gap fill / support and resistance / Kagi charts" | pack | Those are exactly the promoted standalone skills, matched directly |
 | You distribute to several agents or teammates who pick what they need | pack | They can install only the standalone skills they want |
 | You want to install once and maintain one directory | single | Upgrades replace a single directory |
@@ -99,7 +97,7 @@ Pick by the way you work, and **install only one**:
 
 ## How these skills were generated
 
-These skills were produced with the **cangjie-skill** RIA-TV++ pipeline, in six stages:
+These skills were produced with the **[cangjie-skill](https://github.com/kangarooking/cangjie-skill)** RIA-TV++ pipeline, in six stages:
 
 1. **Whole-book comprehension (Adler analysis)** — apply Mortimer Adler's analytical reading method to the book: structure, interpretation, criticism, application
 2. **Parallel extraction** — several specialized extractors (frameworks, principles, cases, counter-examples, terminology) mine candidate methodology units from the source text

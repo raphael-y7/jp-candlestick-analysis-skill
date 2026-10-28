@@ -35,7 +35,6 @@
 |---|---|---|
 | 可发现入口 | **1 个**：`jp-candlestick-analysis-skill` | **6 个**：1 个来源路由入口 + 5 个已晋级独立 skill |
 | 27 张能力卡放在哪 | 全部在入口的 `references/capabilities/` 里，由入口按路由表按需加载 1–2 张 | 5 张高频卡各自独立成 skill；其余 22 张仍在 router 的 `references/` 里 |
-| agent 的 skill 列表 | 只多 1 项 | 一次多 6 项 |
 | 触发方式 | 只有入口的 description 参与匹配，进入后靠路由表分流 | 5 个高频能力可被 description 直接命中，少一跳 |
 | 升级维护 | 替换 1 个目录 | 替换 6 个目录 |
 
@@ -54,7 +53,6 @@ pack 里被晋级为独立 skill 的 5 张卡：
 | 你的工作方式 | 推荐 | 原因 |
 |---|---|---|
 | 用 DSH / Codex / Claude Code 等有 skills 目录，希望列表干净 | single | 只占 1 个入口，能力一张不少 |
-| agent 的 skill 数量有预算（例如上限 8 个），或已经装了很多 skill | single | pack 会一次占掉 6 个名额 |
 | 日常问题高度集中在"止损放哪 / 目标价多少 / 缺口回补 / 支撑阻挡 / 钥匙图" | pack | 这 5 类正是被晋级的独立 skill，能直接命中 |
 | 要分发给多个 agent 或团队，各自按需取用 | pack | 可以只装其中几个独立 skill，不必整包 |
 | 只想装一次、不想维护多个目录 | single | 升级时只替换 1 个目录 |
@@ -99,7 +97,7 @@ pack 里被晋级为独立 skill 的 5 张卡：
 
 ## 这些 skill 是怎么生成出来的
 
-这套 skill 使用 **cangjie-skill** 的 RIA-TV++ 流水线生成，整个流程分六个阶段：
+这套 skill 使用 **[cangjie-skill](https://github.com/kangarooking/cangjie-skill)** 的 RIA-TV++ 流水线生成，整个流程分六个阶段：
 
 1. **整书理解（Adler 分析）**——用 Mortimer Adler 的分析阅读法，对全书做结构、解释、批判、应用四步拆解
 2. **并行提取**——同时派多个专项提取器（框架、原则、案例、反例、术语），从原文中提取候选方法论单元
