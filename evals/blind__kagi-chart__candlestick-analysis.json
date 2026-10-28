@@ -1,0 +1,191 @@
+[
+  {
+    "suite": "kagi-chart-skill",
+    "case_id": "should-trigger-01",
+    "would_trigger": true,
+    "chosen": "kagi-chart-skill",
+    "routed_card": null,
+    "action": "用每日净值序列画钥匙图（自选并声明转向值），以肩腰高低与阴阳线转换判断强弱。",
+    "reason": "只有净值没有开高低价的画图分析正是 kagi-chart-skill 描述里的明示触发场景。"
+  },
+  {
+    "suite": "kagi-chart-skill",
+    "case_id": "should-trigger-02",
+    "would_trigger": true,
+    "chosen": "kagi-chart-skill",
+    "routed_card": null,
+    "action": "解释转向值设定：绝对值或百分比、3% 常用、5% 长线，须自选并全程声明。",
+    "reason": "\"转向值\"是 kagi-chart-skill 的触发词，问题即该卡的核心设定项。"
+  },
+  {
+    "suite": "kagi-chart-skill",
+    "case_id": "should-trigger-03",
+    "would_trigger": true,
+    "chosen": "kagi-chart-skill",
+    "routed_card": null,
+    "action": "按肩腰节节抬高=强势、阴线转阳线的读法与中点规则给出继续持有或减仓的判断。",
+    "reason": "粗线/细线交替与一段段抬高的描述就是钥匙图的肩腰阴阳结构判读。"
+  },
+  {
+    "suite": "kagi-chart-skill",
+    "case_id": "should-trigger-04",
+    "would_trigger": true,
+    "chosen": "kagi-chart-skill",
+    "routed_card": null,
+    "action": "识别为钥匙图双窗口底（两腰夹一肩），并给出确认条件（突破肩部/二级三级突破确认）。",
+    "reason": "点名钥匙图，且两段粗低位夹一段细抬升正是该卡描述的双窗口结构。"
+  },
+  {
+    "suite": "kagi-chart-skill",
+    "case_id": "should-not-trigger-01",
+    "would_trigger": true,
+    "chosen": "jp-candlestick-analysis-skill",
+    "routed_card": "renko-chart",
+    "action": "按砖形图画法回答砖值设定：预设砖值、收盘价达砖值才加砖、横盘拉锯降频。",
+    "reason": "砖块图请求落在 jp-candlestick-analysis-skill 描述明示的绘图范围（砖形图），而 kagi-chart-skill 自己声明不适用砖形图。"
+  },
+  {
+    "suite": "kagi-chart-skill",
+    "case_id": "should-not-trigger-02",
+    "would_trigger": true,
+    "chosen": "jp-candlestick-analysis-skill",
+    "routed_card": "three-line-break-chart",
+    "action": "讲解三线反向突破图画法：创新高画白线、创新低画黑线、区间内不画线及三根后转向线规则。",
+    "reason": "用户描述的白线黑线画法即三线反向突破图，主入口描述明示可绘制。"
+  },
+  {
+    "suite": "kagi-chart-skill",
+    "case_id": "should-not-trigger-03",
+    "would_trigger": false,
+    "chosen": "none",
+    "routed_card": null,
+    "action": "如实告知无法精确预测明天盘中最低价，不提供挂单抄底点位。",
+    "reason": "六个入口都只做基于已有数据的形态与目标判读，没有能精确预测未来价位的。"
+  },
+  {
+    "suite": "kagi-chart-skill",
+    "case_id": "edge-01",
+    "would_trigger": true,
+    "chosen": "kagi-chart-skill",
+    "routed_card": null,
+    "action": "引用滞后声明解释该图抓主段、不逃顶不抓底，再评估方法去留而非整体否定。",
+    "reason": "净值画图加约一个月滞后正是 kagi-chart-skill 滞后声明的原文内容。"
+  },
+  {
+    "suite": "kagi-chart-skill",
+    "case_id": "edge-02",
+    "would_trigger": true,
+    "chosen": "jp-candlestick-analysis-skill",
+    "routed_card": "data-quality-confirmation-gate",
+    "action": "说明收盘价画图以收市价为确认锚、盘中波动不作信号，不跟盘中变来变去的提示。",
+    "reason": "问的是盘中波动算不算信号，属收市价确认锚判读；未点名具体图种，不走单一图种入口。"
+  },
+  {
+    "suite": "kagi-chart-skill",
+    "case_id": "edge-03",
+    "would_trigger": true,
+    "chosen": "jp-candlestick-analysis-skill",
+    "routed_card": "ambiguous",
+    "action": "先确认画的是哪种收盘价图，再说明该图族不显示时间轴与振幅是特性，在意振幅可并用蜡烛图。",
+    "reason": "无时间轴无日内区间是钥匙图/砖形图/三线图的共性，prompt 未点名图种，无法定位到具体卡。"
+  },
+  {
+    "suite": "jp-candlestick-analysis-skill",
+    "case_id": "should-trigger-01",
+    "would_trigger": true,
+    "chosen": "jp-candlestick-analysis-skill",
+    "routed_card": "umbrella-line-family",
+    "action": "按先前下跌趋势定名锤子线，要求次日收市越过实体上沿确认后再谈买入。",
+    "reason": "下跌后长下影小实体的真伪与确认属伞形线族（锤子线/上吊线）判读。"
+  },
+  {
+    "suite": "jp-candlestick-analysis-skill",
+    "case_id": "should-trigger-02",
+    "would_trigger": true,
+    "chosen": "jp-candlestick-analysis-skill",
+    "routed_card": "volume-confirmation",
+    "action": "按量只做相对比较、量缩新高只减分不定罪评估持仓，等蜡烛图信号出现再行动。",
+    "reason": "创新高而量缩的量价关系正是成交量确认卡的核心判读内容。"
+  },
+  {
+    "suite": "jp-candlestick-analysis-skill",
+    "case_id": "should-trigger-03",
+    "would_trigger": true,
+    "chosen": "jp-candlestick-analysis-skill",
+    "routed_card": "doji-context",
+    "action": "把上升趋势只下调一档（升转中性）而非判变盘，等第二信号出现才改判。",
+    "reason": "涨后十字星的正确读法属十字线语境卡：单根十字不改判下降。"
+  },
+  {
+    "suite": "jp-candlestick-analysis-skill",
+    "case_id": "should-trigger-04",
+    "would_trigger": true,
+    "chosen": "jp-candlestick-analysis-skill",
+    "routed_card": "long-term-patterns",
+    "action": "用三次试探同一水平加最后一峰大阴线确认大顶，破颈线后再定清仓并登记新阻挡。",
+    "reason": "多年上涨后三次同价位受阻正是大级别顶底的判据场景。"
+  },
+  {
+    "suite": "jp-candlestick-analysis-skill",
+    "case_id": "should-trigger-05",
+    "would_trigger": true,
+    "chosen": "jp-candlestick-analysis-skill",
+    "routed_card": "nonstandard-synthetic-candle",
+    "action": "按非标形态三选一处理：等次日按标准判读确认、关键位置加持直接采信、或合成蜡烛四步法互证。",
+    "reason": "形态差一点不满足判据正是非标合成蜡烛卡的定义场景。"
+  },
+  {
+    "suite": "jp-candlestick-analysis-skill",
+    "case_id": "should-not-trigger-01",
+    "would_trigger": true,
+    "chosen": "stop-reward-risk-skill",
+    "routed_card": null,
+    "action": "先由形态客观给定止损位，再用固定声明的方法定目标，核算风险报偿比后决定做或放弃。",
+    "reason": "下单前问止损挂哪、盈亏比划不划算正是 stop-reward-risk-skill 的明示触发场景。"
+  },
+  {
+    "suite": "jp-candlestick-analysis-skill",
+    "case_id": "should-not-trigger-02",
+    "would_trigger": false,
+    "chosen": "none",
+    "routed_card": null,
+    "action": "不激活任何已装入口，按基本面与估值方法直接作答或说明无法预测营收与合理倍数。",
+    "reason": "财报营收与估值倍数属基本面问题，六个入口全是技术面图形与交易执行。"
+  },
+  {
+    "suite": "jp-candlestick-analysis-skill",
+    "case_id": "should-not-trigger-03",
+    "would_trigger": false,
+    "chosen": "none",
+    "routed_card": null,
+    "action": "不激活任何已装入口，按期权对冲知识回答行权价与到期月选择。",
+    "reason": "认沽期权对冲组合设计与六个技术分析入口均无关。"
+  },
+  {
+    "suite": "jp-candlestick-analysis-skill",
+    "case_id": "edge-01",
+    "would_trigger": true,
+    "chosen": "jp-candlestick-analysis-skill",
+    "routed_card": "data-quality-confirmation-gate",
+    "action": "先过数据三查：净值无真实开盘价与高低价，横盘净值不等于四根十字星，再谈是否按变盘准备。",
+    "reason": "净值序列能否构成十字星是形态判读前的数据资格问题，属三查关卡。"
+  },
+  {
+    "suite": "jp-candlestick-analysis-skill",
+    "case_id": "edge-02",
+    "would_trigger": false,
+    "chosen": "none",
+    "routed_card": null,
+    "action": "拒绝无依据荐股与保证下月赚15%的诉求，说明只能对给定标的做可检查的信号判读。",
+    "reason": "无标的选股加收益保证超出所有已装入口的能力边界。"
+  },
+  {
+    "suite": "jp-candlestick-analysis-skill",
+    "case_id": "edge-03",
+    "would_trigger": true,
+    "chosen": "jp-candlestick-analysis-skill",
+    "routed_card": "support-resistance-system-skill",
+    "action": "指出盘中穿越不算破位，等收市价确认跌破昨低后再决定卖出，不建议盘中卖了接回。",
+    "reason": "盘中跌破前低是否算破位属支撑阻挡体系的收市价确认口径。"
+  }
+]
