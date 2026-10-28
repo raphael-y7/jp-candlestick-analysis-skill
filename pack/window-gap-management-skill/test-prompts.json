@@ -1,0 +1,76 @@
+{
+  "skill": "window-gap-management-skill",
+  "version": "0.1.0",
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "上周一它出利好大幅高开，跟前面价格之间留了个缺口，这几天一直没补。这个缺口底下还能当支撑用吗？将来会不会突然掉下来补上？",
+      "expected_behavior": "调用 window-gap-management-skill：先按'影线互不重叠才算窗口'核验，整个窗口空间作支撑（向上窗口关键支撑在窗口底），回撤进窗口是买点、止损设收市破窗口底；不背书'跳空必回补'，回补与否以收市价封闭为准。",
+      "notes": "正面场景：缺口支撑/会不会回补（A2 核心问句）。"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "它高位跳空低开破位了，我手里还有仓位。是等反弹把上面的缺口填了再卖，还是收市就该走？",
+      "expected_behavior": "调用 window-gap-management-skill：跳空后的操作判定——窗口封闭以收市价为准（盘中回补不算），收市封闭窗口=原趋势终结；给出减仓/离场的可检查条件。",
+      "notes": "正面场景：跳空后怎么操作 + 收市价封闭口径。"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "两个月里它一路向上跳空了三次，留下三个缺口。老话说一跳二跳三跳竭，我是不是该清仓了？还是继续拿着？",
+      "expected_behavior": "调用 window-gap-management-skill：数满三个窗口只做保护性动作（停止顺势加仓、上调止损、部分兑现），不等于必然反转；趋势持续到最后一个窗口被收市价关闭才判终结，纠正'三跳必竭'教条。",
+      "notes": "正面场景：连续缺口要不要反手（intent 3）。"
+    },
+    {
+      "id": "should-trigger-04",
+      "type": "should_trigger",
+      "prompt": "它先是向下跳空跌了一段，反弹几天后又向下跳空，中间孤零零吊着一根K线。这是不是就是那种孤岛形态？那个孤岛的下沿算不算第一道支撑或压力？",
+      "expected_behavior": "调用 window-gap-management-skill：岛形反转判定（两侧窗口隔离），登记孤岛边缘为第一支撑/阻挡，给出后续验证条件（收市价口径）。",
+      "notes": "正面场景：岛形反转支撑阻挡判定（intent 4）。"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "它昨天盘中跌破了前面三个星期都没破的平台下沿，吓得我赶紧看盘，结果收市又收回到平台里面了。这是不是假跌破？能不能低吸一笔？",
+      "expected_behavior": "不应调用 window-gap-management-skill。应触发 support-resistance-system-skill：破低反涨（Spring）假突破判定与反向交易四件套；本场景无跳空窗口，属平台支撑的假突破。",
+      "notes": "近邻混淆诱饵：应触发同书晋级的 support-resistance-system-skill。"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "跳空那天留下的那根K线实体很小，上下的影线都拖得很长。这根线本身说明什么？",
+      "expected_behavior": "不应把 window-gap-management-skill 当主应答。'这根K线本身说明什么'是单根读数问题，应由主入口 jp-candlestick-analysis-skill 路由到 single-candle-reading（单根读数卡：高浪线/纺锤线判读）；本 skill 只管窗口判定与管理。",
+      "notes": "诱饵：应由来源路由入口处理的单根K线判读（promoted 与路由入口互斥负例）。"
+    },
+    {
+      "id": "should-not-trigger-03",
+      "type": "should_not_trigger",
+      "prompt": "帮我算算这只可转债的转股溢价率是多少，值不值得转股。",
+      "expected_behavior": "不应调用 window-gap-management-skill：可转债转股溢价率属衍生品计算，与本书的图表方法无关。",
+      "notes": "诱饵：与本书无关的衍生品计算。"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "我那只场外基金周二净值1块2，周三直接1块28，中间这道缺口要不要等回补了再赎回？",
+      "expected_behavior": "边界处理：场外基金每日只有一个净值，无开盘价与影线，'缺口/回补'概念对净值序列不成立。应声明净值序列没有窗口结构，赎回时机判定应转钥匙图趋势判定，不套用窗口规则。",
+      "notes": "边界：基金净值无窗口结构，防止概念误移。"
+    },
+    {
+      "id": "edge-02",
+      "type": "edge_case",
+      "prompt": "朋友说它这两根K线中间有缺口必须回补。可我看了半天，两根K线的下影线其实是搭在一起的，只有实体那一段是空的。这到底算不算缺口？",
+      "expected_behavior": "边界处理：窗口以影线之间互不重叠为准——影线搭接、仅实体空缺=实体缺口，不作窗口，不适用窗口支撑与封闭规则。应给出该判据并纠正'实体缺口当窗口'的误用。",
+      "notes": "边界：实体缺口 vs 窗口判据（x11 高频误用）。"
+    },
+    {
+      "id": "edge-03",
+      "type": "edge_case",
+      "prompt": "沪铜昨晚跳空高开，今天盘中就把缺口补掉了。我能不能盘中先反着做一把，等它回补就平仓？",
+      "expected_behavior": "边界处理：窗口判定本身可执行——封闭以收市价为准，盘中回补不构成终结信号；但'盘中反着做一把'属 T+0 盘中打法，明确超出本方法范围，应声明并拒绝细化。",
+      "notes": "边界：期货 T+0 技法排除 + 盘中封闭口径。"
+    }
+  ]
+}
