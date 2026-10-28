@@ -1,0 +1,117 @@
+{
+  "generated_by": "cangjie-tools v2.5.0",
+  "bundle_id": "bundle.jp-candlestick-analysis-skill",
+  "router_entrypoint": "jp-candlestick-analysis-skill-router",
+  "entrypoint_count": 6,
+  "capability_count": 27,
+  "destinations": {
+    "cap.jp-candlestick-analysis-skill.signal-context-filter": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/signal-context-filter-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.data-quality-confirmation-gate": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/data-quality-confirmation-gate-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.single-candle-reading": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/single-candle-reading-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.volume-confirmation": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/volume-confirmation-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.umbrella-line-family": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/umbrella-line-family-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.two-line-reversal": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/two-line-reversal-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.harami-secondary-reversals": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/harami-secondary-reversals-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.star-family": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/star-family-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.doji-context": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/doji-context-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.new-high-count": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/new-high-count-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.window-gap-management-skill": {
+      "promoted_to": "window-gap-management-skill",
+      "router_view": "jp-candlestick-analysis-skill-router/references/capabilities/window-gap-management-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.continuation-patterns": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/continuation-patterns-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.long-term-patterns": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/long-term-patterns-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.signal-confluence": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/signal-confluence-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.support-resistance-system-skill": {
+      "promoted_to": "support-resistance-system-skill",
+      "router_view": "jp-candlestick-analysis-skill-router/references/capabilities/support-resistance-system-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.price-target-retracement-skill": {
+      "promoted_to": "price-target-retracement-skill",
+      "router_view": "jp-candlestick-analysis-skill-router/references/capabilities/price-target-retracement-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.ma-verification": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/ma-verification-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.divergence-index": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/divergence-index-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.oscillator-confirmation": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/oscillator-confirmation-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.stop-reward-risk-skill": {
+      "promoted_to": "stop-reward-risk-skill",
+      "router_view": "jp-candlestick-analysis-skill-router/references/capabilities/stop-reward-risk-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.discipline-falsification": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/discipline-falsification-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.nonstandard-synthetic-candle": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/nonstandard-synthetic-candle-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.three-line-break-chart": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/three-line-break-chart-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.renko-chart": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/renko-chart-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.kagi-chart-skill": {
+      "promoted_to": "kagi-chart-skill",
+      "router_view": "jp-candlestick-analysis-skill-router/references/capabilities/kagi-chart-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.new-chart-pipeline": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/new-chart-pipeline-skill.md"
+    },
+    "cap.jp-candlestick-analysis-skill.news-reaction-sourcing": {
+      "served_by": "jp-candlestick-analysis-skill-router",
+      "card": "jp-candlestick-analysis-skill-router/references/capabilities/news-reaction-sourcing-skill.md"
+    }
+  }
+}
