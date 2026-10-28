@@ -1,4 +1,4 @@
-<h1 align="center">Japanese Candlestick Charting Skill</h1>
+<h1 align="center">JP Candlestick Analysis Skill</h1>
 
 <p align="center"><a href="README.md">中文</a> | English</p>
 
