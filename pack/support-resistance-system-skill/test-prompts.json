@@ -1,0 +1,76 @@
+{
+  "skill": "support-resistance-system-skill",
+  "version": "0.1.0",
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "它昨天盘中跌破了横了半年的平台下沿，我心一凉，结果收市又收回到平台里了。这是不是假摔？能不能逢低接一点？接了的话止损挂哪？",
+      "expected_behavior": "调用 support-resistance-system-skill：破低反涨（Spring）判定与反向交易四件套——收市复位入场、止损=最近极点下方（收市价口径）、目标①区间顶边/前高、目标②更远前高（备用）；假突破时量轻收回、收回时量重为加分项。",
+      "notes": "正面场景：假突破判定与反向入场（A2 核心问句）。"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "这只票在12块附近横了三个月，上个月收市正式跌破，现在反弹到12块出头就上不去了。原来那个平台底是不是变成天花板了？我套牢的单子该在哪减仓？",
+      "expected_behavior": "调用 support-resistance-system-skill：极性转换——旧支撑收市破位即登记为新阻挡，回抽12块一带=二次确认位，按新阻挡处理减仓决策。",
+      "notes": "正面场景：支撑变阻力（极性转换登记）。"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "我沿着它这半年每次回落的低点连了一条上升趋势线。这条线到底该连K线的哪里？前天盘中破了一下又收回来了，算不算有效破位？",
+      "expected_behavior": "调用 support-resistance-system-skill：趋势线画法（连影线不连实体）与破位确认（收市价穿越才算，盘中穿越不算）；并给出破位后的处理路径。",
+      "notes": "正面场景：趋势线画法与破位确认口径。"
+    },
+    {
+      "id": "should-trigger-04",
+      "type": "should_trigger",
+      "prompt": "它冲过了前面那个高点，但收市又掉回高点下面去了，当天放了很大的量、收了根长上影。这算不算向上假突破？我的仓位要不要先减了？",
+      "expected_behavior": "调用 support-resistance-system-skill：破高反跌（Upthrust）判定——收市跌回前高下方为复位信号，按四件套处理（A股落地为减仓/离场，不提供反向做空），止损参照最近极点上方。",
+      "notes": "正面场景：向上假突破（Upthrust）。"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "它今天向上跳空高开留了个缺口没回补，我想在缺口下面挂单等它回踩，挂哪个位置合适？",
+      "expected_behavior": "不应调用 support-resistance-system-skill。应触发 window-gap-management-skill：窗口判定与窗口底支撑挂单位置；平台/趋势线假突破归本 skill，缺口支撑归窗口卡。",
+      "notes": "近邻混淆诱饵：应触发同书晋级的 window-gap-management-skill。"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "跌破平台那天收的是根光头大阴线，实体很长。这根大阴线本身有什么说法吗？",
+      "expected_behavior": "不应把 support-resistance-system-skill 当主应答。单根K线含义解读应由主入口 jp-candlestick-analysis-skill 路由到 single-candle-reading（长实体/捉腰带线判读）；本 skill 管价位结构与假突破，不做单根形态语义。",
+      "notes": "诱饵：应由来源路由入口处理的单根判读（promoted 与路由入口互斥负例）。"
+    },
+    {
+      "id": "should-not-trigger-03",
+      "type": "should_not_trigger",
+      "prompt": "帮我挑几只股息率高、适合长期拿着收分红的银行股。",
+      "expected_behavior": "不应调用 support-resistance-system-skill：选股与红利策略不在整本书范围，本书方法只解决已定标的的图表演练与买卖决策。",
+      "notes": "诱饵：与本书无关的选股场景。"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "我那只场外基金净值前阵子跌破了0块9这个整数关口，最近又站回去了。这算假破位吗？能加仓吗？",
+      "expected_behavior": "边界处理：净值每日只有一个收市口径价格，无盘中穿越与影线，'盘中假破位再收复'的机制不存在——破位与否直接由当日净值定。可降级回答（收市口径的破位/收复二元判定，建议用钥匙图确认趋势），但须声明四件套的盘中复位与影线极点止损对净值不适用。",
+      "notes": "边界：基金净值无盘中，假突破机制退化。"
+    },
+    {
+      "id": "edge-02",
+      "type": "edge_case",
+      "prompt": "它收市跌破趋势线已经两天了，我还没走，也不太想走。你帮我找找有没有什么理由能说明它还能涨回去？",
+      "expected_behavior": "边界处理：破位判定应客观执行——收市穿越两天=有效破位，旧趋势线支撑已按极性转换登记为新阻挡。'找理由继续持有'的诉求应被拒绝：本 skill 输出客观破位结论与新阻挡登记，执念与改判问题转纪律自查，不提供情绪安抚。",
+      "notes": "边界：既定立场下的客观判定 vs 找理由。"
+    },
+    {
+      "id": "edge-03",
+      "type": "edge_case",
+      "prompt": "它今天低开留了个向下的缺口，盘中跌破了前低，尾盘又拉回前低上方。这个破位算数吗？那个缺口又算什么？",
+      "expected_behavior": "边界处理：复合场景——跌破前低又收复的假突破判定归本 skill（以收市价为准）；低开空隙是否构成窗口、窗口支撑在哪归 window-gap-management-skill。应调用本 skill 处理主诉求并声明缺口部分需窗口规则协同，不应以'涉及缺口'为由整体拒绝。",
+      "notes": "边界：与窗口卡协同的复合场景。"
+    }
+  ]
+}

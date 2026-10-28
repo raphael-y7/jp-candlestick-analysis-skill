@@ -1,0 +1,83 @@
+{
+  "skill": "jp-candlestick-analysis-skill",
+  "version": "0.1.0",
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "它连跌了快两个月，昨天收了根带着长长下影线的小实体，朋友说这叫锤子线能抄底，真的假的？要不要再等等？",
+      "expected_behavior": "应激活主入口 jp-candlestick-analysis-skill 并路由到能力卡 umbrella-line-family：伞形线族三判据+跌后定名锤子线看涨+必须次日收市验证（未验证=观望）；入口先过数据门与位置过滤（跌势位置、支撑环境）。",
+      "notes": "路由正面：伞形线族判定与次日验证。"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "它最近天天创新高，可成交额一天比一天少。这种量价背离还能拿吗？",
+      "expected_behavior": "应激活主入口 jp-candlestick-analysis-skill 并路由到能力卡 volume-confirmation：相对量原则与量缩新高判读（警讯但仅减分不定罪），结合价格位置与积聚/派发矩阵给出可检查结论；不孤立凭量下指令。",
+      "notes": "路由正面：成交量验证与量价背离。"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "它涨了一大段之后收了根开盘价收盘价几乎一样的十字星，是不是要变盘了？我有点拿不住。",
+      "expected_behavior": "应激活主入口 jp-candlestick-analysis-skill 并路由到能力卡 doji-context：单根十字线只把趋势下调一档（上升→上升或中性），须次日第二信号才改判；给动作分档（平部分仓/上调止损），纠正'见十字喊顶'。",
+      "notes": "路由正面：十字线环境判定与动作分档。"
+    },
+    {
+      "id": "should-trigger-04",
+      "type": "should_trigger",
+      "prompt": "这票涨了两三年，最近半年三次冲到差不多同一个价位都掉下来了，最后一次还收了根大阴线盖下来。是不是大顶？要不要清仓？",
+      "expected_behavior": "应激活主入口 jp-candlestick-analysis-skill 并路由到能力卡 long-term-patterns：三重顶/三尊结构判定（三次试探同一水平+最后一峰蜡烛信号确认+收市破颈线才判反转），破位后按极性转换登记新阻挡；日线级信号仅作辅助。",
+      "notes": "路由正面：长期形态大顶判定。"
+    },
+    {
+      "id": "should-trigger-05",
+      "type": "should_trigger",
+      "prompt": "有只票的K线组合看着挺像见顶的那个双K形态，但第二根的开盘价差一点点，条件没完全满足，软件的形态选股也没把它选出来。这种差一点的形态到底该怎么算？",
+      "expected_behavior": "应激活主入口 jp-candlestick-analysis-skill 并路由到能力卡 nonstandard-synthetic-candle：非标准形态三处理法（按标准判读等次日更弱收盘确认/关键位置加持直接采信/合成蜡烛四步法），机器筛选结果必须人工复核。",
+      "notes": "路由正面：非标准形态与合成蜡烛（软件筛选排除的近似形态）。"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "我打算明天开盘买这只票，帮我算算这笔的止损挂哪，盈亏比低于多少就直接放弃？",
+      "expected_behavior": "不应激活主入口 jp-candlestick-analysis-skill。应触发独立晋级的 stop-reward-risk-skill（止损位设定与风险报偿比核算）；晋级 skill 与路由入口对该问句互斥，主入口不应抢答。",
+      "notes": "近邻混淆诱饵：应触发同书晋级的 stop-reward-risk-skill。"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "帮我看看这家公司三季报营收增速能不能到20%，明年利润预估按多少倍估值合理。",
+      "expected_behavior": "不应激活主入口 jp-candlestick-analysis-skill：基本面与业绩预测明确在范围之外（消息只按市场对消息的反应核对，不做业绩判断）。",
+      "notes": "诱饵：与全书无关的基本面场景。"
+    },
+    {
+      "id": "should-not-trigger-03",
+      "type": "should_not_trigger",
+      "prompt": "帮我设计一个用认沽期权对冲持仓的组合，行权价和到期月怎么选？",
+      "expected_behavior": "不应激活主入口 jp-candlestick-analysis-skill：期权类建议（备兑/保护性期权为美国市场工具，A股多数标的无对等物）属入口声明范围外并停止的场景，不应进入K线解读流程。",
+      "notes": "诱饵：入口 stop_conditions 中的期权场景。"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "我那只场外基金净值连着四天基本横着，是不是就相当于连收四根十字星？要不要按变盘准备？",
+      "expected_behavior": "边界处理：应先过数据门——净值每日只有一个价格，无开盘/最高/最低，不构成K线，'十字星'无从谈起，形态判读必须停止。正确路径是声明数据口径并转钥匙图（场外基金唯一图形方案，独立 skill 或入口内承接）判定趋势，不输出变盘结论。",
+      "notes": "边界：数据门拦截净值序列的形态误读。"
+    },
+    {
+      "id": "edge-02",
+      "type": "edge_case",
+      "prompt": "代码就不说了，你直接告诉我现在买哪只票，下个月能赚15%就行。",
+      "expected_behavior": "边界处理：无标的、无行情数据且带收益承诺——主入口只对给定标的的可检验数据输出买/减/观望/放弃结论，不提供荐股与任何收益率承诺；应拒绝该框架并引导提供具体标的与数据。",
+      "notes": "边界：无数据荐股与收益承诺。"
+    },
+    {
+      "id": "edge-03",
+      "type": "edge_case",
+      "prompt": "现在才上午十点半，它刚刚跌破了昨天的低点。这算破位了吗？我现在要不要先卖了下午再接回来？",
+      "expected_behavior": "边界处理：破位/形态完成以收市价为准（盘中穿越不算），上午的破位不作数；'先卖下午接回'属 T+0 盘中打法，明确不提供。应激活主入口（数据质量与确认口径门 data-quality-confirmation-gate），输出等待收市确认与 T+1 下的保护性选项。",
+      "notes": "边界：盘中确认口径 + T+0 排除。"
+    }
+  ]
+}

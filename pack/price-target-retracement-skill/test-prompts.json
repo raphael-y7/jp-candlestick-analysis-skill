@@ -1,0 +1,76 @@
+{
+  "skill": "price-target-retracement-skill",
+  "version": "0.1.0",
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "它从8块多涨到12块开始横着走，如果后续回调，一般会落到哪些价位？我想提前把接货的单子想好。",
+      "expected_behavior": "调用 price-target-retracement-skill：以波段 8→12 计算三档回撤位（38%/50%/62%，50% 最通用），并绑定纪律：不在裸回撤位买卖，须等该位置出现K线反转信号验证才接货。",
+      "notes": "正面场景：回调到哪买 + 裸回撤位纪律（A2 核心问句）。"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "它放量突破了一个横了三个月的箱体，箱顶10块5、箱底9块，现在11块了。理论上这波能看到哪？我打算到位置就给持仓减仓。",
+      "expected_behavior": "调用 price-target-retracement-skill：箱体突破目标=箱体高度投影到被突破边（10.5）上方（10.5+1.5≈12），失效条件=收市跌回箱体内；强调目标只用于平仓、不用于开仓。",
+      "notes": "正面场景：箱体突破目标测算与失效条件。"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "它先是急涨了一大段，然后在一个窄窄的、微微向下斜的小通道里缩量整理了一个多星期。要是整理完继续涨，理论上还能涨多少？",
+      "expected_behavior": "调用 price-target-retracement-skill：旗形测算——旗杆高度加到密集区底边（须声明所采用口径）；并提示若现价已远离测算起点，先核对风险报偿比再考虑追。",
+      "notes": "正面场景：旗形投影（尼森保守算法，口径须声明）。"
+    },
+    {
+      "id": "should-trigger-04",
+      "type": "should_trigger",
+      "prompt": "它震荡快两个月了，高点一个比一个低、低点一个比一个高，快挤到尖上了。如果向上突破，第一目标大概在哪？",
+      "expected_behavior": "调用 price-target-retracement-skill：三角形测算——以最宽处高度加到被突破边之外得第一目标，并以收市价确认突破有效为前提。",
+      "notes": "正面场景：三角形收窄后的突破目标。"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "我准备在它回踩这条上升趋势线的时候买一笔。帮我定一下这笔的止损挂哪，盈亏比多少以内就不做？",
+      "expected_behavior": "不应调用 price-target-retracement-skill。应触发 stop-reward-risk-skill：入场前止损位与风险报偿比核算；本 skill 只管目标与回撤测算，比值裁决不在其范围。",
+      "notes": "近邻混淆诱饵：应触发同书晋级的 stop-reward-risk-skill。"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "它正好回落到上一波涨幅一半的位置，今天收了根长下影线。这根线能不能证明支撑成立，可以买了吗？",
+      "expected_behavior": "不应把 price-target-retracement-skill 当主应答。回撤数字可由其提供，但'这根K线能不能确认支撑'是形态验证问题，应由主入口 jp-candlestick-analysis-skill 路由到 umbrella-line-family（伞形线族卡）判读；'到位就买'被目标测算卡明确排除。",
+      "notes": "诱饵：应由来源路由入口处理的形态验证场景（promoted 与路由入口互斥负例）。"
+    },
+    {
+      "id": "should-not-trigger-03",
+      "type": "should_not_trigger",
+      "prompt": "帮我分析分析这家公司三季报的营收和净利润，现在这个估值贵不贵？",
+      "expected_behavior": "不应调用 price-target-retracement-skill：基本面与业绩估值分析超出整本书范围，此语境的'目标价'与图表测算无关。",
+      "notes": "诱饵：与本书无关的基本面场景。"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "我买的场外基金净值从1块5涨到1块8，帮我算算净值回撤到哪儿算便宜，到那儿我就加仓。",
+      "expected_behavior": "边界处理：净值序列为收市口径，三档回撤位可以计算；但'到那儿就加仓'违反'不在裸回撤位买卖'，而净值数据没有K线信号可供验证。应先算位，再声明验证途径缺失，建议以钥匙图（场外基金唯一图形方案）的阴阳转换作验证，否则只能降级为参考位。",
+      "notes": "边界：基金净值的裸回撤位纪律与验证途径缺失。"
+    },
+    {
+      "id": "edge-02",
+      "type": "edge_case",
+      "prompt": "你之前帮我算的50%回撤位在10块，今天正好碰到10块了，我直接把剩下的钱全押上行不行？",
+      "expected_behavior": "边界处理：回撤位不等于支撑，'到位就买'被明确禁止。应先核对该位置有无K线反转信号、是否叠加支撑阻挡与超卖环境；无验证信号则不建议买入，更不建议一次性重仓。",
+      "notes": "边界：到位就买 + 一次性重仓的 misuse 拦截。"
+    },
+    {
+      "id": "edge-03",
+      "type": "edge_case",
+      "prompt": "按箱体算的目标是12块，前几天有一天盘中冲到12块2又掉下来了，现在11块8。这个目标算实现了吗？还算数吗？",
+      "expected_behavior": "边界处理：目标达成与失效以收市价为准（确认锚）：盘中触及不作数，收市到达才算实现；若收市跌回箱体内部则原目标作废，须按新结构重算。",
+      "notes": "边界：收市价口径下的目标达成与作废判定。"
+    }
+  ]
+}

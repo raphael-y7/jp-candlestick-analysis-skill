@@ -126,19 +126,29 @@ jp-candlestick-analysis-skill/
 ├── README.md                      ← 你正在看的（中文）
 ├── README.en.md                   ← English version
 ├── LICENSE                        ← MIT
+├── GITHUB_REPO.md                 ← GitHub 仓库元信息（名称 / 描述 / topics）
 ├── BOOK_OVERVIEW.md               ← 整书理解（Adler 四步拆解，阶段 0 产出）
 ├── verified.md                    ← 27 个规范单元的三重验证结论
 ├── INDEX.md                       ← skill 地图（能力总表 + 依赖关系 + 加载顺序）
+├── TEST_SUMMARY.md                ← 阶段 4 压力测试摘要（测试范围 / 结构检查 / 结果）
+├── CANGJIE_ADAPTATION.md          ← 仓颉适配说明（文本状态 / 蒸馏目标 / 证据规则 / 使用边界）
 ├── bundle/                        ← 能力卡源（本次蒸馏的唯一真源）
 │   ├── verified.yaml              ← 27 个能力的规范化定义（slug / 判据 / 去向）
 │   ├── cards/                     ← 27 张能力卡，文件名统一以 -skill.md 结尾
 │   └── book/
 │       ├── overview.md            ← 整书概览
 │       └── glossary.md            ← 术语表
+├── candidates/                    ← 阶段 1 提取候选池（331 条，三重验证前的原始记录）
+│   ├── frameworks.md              ← 框架候选 45 条
+│   ├── principles.md              ← 原则候选 124 条
+│   ├── cases.md                   ← 案例候选 40 条
+│   ├── counter-examples.md        ← 反例候选 35 条
+│   └── glossary.md                ← 术语候选 87 条
 ├── single/                        ← 单一入口模式
 │   └── jp-candlestick-analysis-skill/
 │       ├── SKILL.md               ← 入口：触发条件 + 路由表 + 加载规则
 │       ├── BUILD_MANIFEST.json    ← 编译清单与文件哈希
+│       ├── test-prompts.json      ← 本入口的触发用例（11 条）
 │       └── references/
 │           ├── overview.md        ← 整书概览
 │           ├── capability-index.md  ← 完整意图与关键词索引
@@ -152,29 +162,35 @@ jp-candlestick-analysis-skill/
 │   │   ├── SKILL.md               ← 来源路由入口
 │   │   └── references/            ← 27 张卡 + 索引 / 速查 / 术语 / 概览
 │   ├── stop-reward-risk-skill/
-│   │   └── SKILL.md               ← 单文件即完整能力卡
+│   │   ├── SKILL.md               ← 单文件即完整能力卡
+│   │   └── test-prompts.json      ← 本 skill 的触发用例（10 条）
 │   ├── price-target-retracement-skill/
-│   │   └── SKILL.md
+│   │   ├── SKILL.md
+│   │   └── test-prompts.json
 │   ├── window-gap-management-skill/
-│   │   └── SKILL.md
+│   │   ├── SKILL.md
+│   │   └── test-prompts.json
 │   ├── support-resistance-system-skill/
-│   │   └── SKILL.md
+│   │   ├── SKILL.md
+│   │   └── test-prompts.json
 │   └── kagi-chart-skill/
-│       └── SKILL.md
-└── evals/                          ← 生成过程的测试材料
-    ├── test-results.md             ← 逐项评分与回炉修复记录
-    ├── test-prompts__jp-candlestick-analysis-skill.json
-    ├── test-prompts__stop-reward-risk.json
-    ├── test-prompts__price-target-retracement.json
-    ├── test-prompts__window-gap-management.json
-    ├── test-prompts__support-resistance-system.json
-    ├── test-prompts__kagi-chart-skill.json
-    ├── output-tasks__C01-C14.json
-    ├── output-tasks__C15-C27.json
-    ├── output-assertions__C01-C14.json
-    ├── output-assertions__C15-C27.json
-    ├── all_skills_list.json
-    └── router_cards_list.json
+│       ├── SKILL.md
+│       └── test-prompts.json
+├── evals/                          ← 生成过程的测试材料
+│   ├── test-results.md             ← 逐项评分与回炉修复记录
+│   ├── test-prompts__jp-candlestick-analysis-skill.json
+│   ├── test-prompts__stop-reward-risk.json
+│   ├── test-prompts__price-target-retracement.json
+│   ├── test-prompts__window-gap-management.json
+│   ├── test-prompts__support-resistance-system.json
+│   ├── test-prompts__kagi-chart-skill.json
+│   ├── output-tasks__C01-C14.json
+│   ├── output-tasks__C15-C27.json
+│   ├── output-assertions__C01-C14.json
+│   ├── output-assertions__C15-C27.json
+│   ├── all_skills_list.json
+│   └── router_cards_list.json
+└── rejected/                       ← 空目录（阶段 1.5 无 rejected 候选，保留占位）
 ```
 
 ## 如何使用

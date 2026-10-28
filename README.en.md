@@ -126,19 +126,29 @@ jp-candlestick-analysis-skill/
 ├── README.md                      ← Chinese version
 ├── README.en.md                   ← you are reading this
 ├── LICENSE                        ← MIT
+├── GITHUB_REPO.md                 ← GitHub repo metadata (name / description / topics)
 ├── BOOK_OVERVIEW.md               ← whole-book comprehension (Adler four-step, stage 0 output)
 ├── verified.md                    ← triple-verification conclusions for the 27 canonical units
 ├── INDEX.md                       ← skill map (capability table + dependencies + loading order)
+├── TEST_SUMMARY.md                ← stage 4 stress-test summary (scope / structure checks / results)
+├── CANGJIE_ADAPTATION.md          ← cangjie adaptation notes (text state / goals / evidence rules / limits)
 ├── bundle/                        ← card source (single source of truth for this distillation)
 │   ├── verified.yaml              ← canonical definitions of the 27 capabilities (slug / criteria / destination)
 │   ├── cards/                     ← 27 capability cards, filenames all end with -skill.md
 │   └── book/
 │       ├── overview.md            ← whole-book overview
 │       └── glossary.md            ← glossary
+├── candidates/                    ← stage 1 extraction pool (331 items, before triple verification)
+│   ├── frameworks.md              ← 45 framework candidates
+│   ├── principles.md              ← 124 principle candidates
+│   ├── cases.md                   ← 40 case candidates
+│   ├── counter-examples.md        ← 35 counter-example candidates
+│   └── glossary.md                ← 87 glossary candidates
 ├── single/                        ← single-entry build
 │   └── jp-candlestick-analysis-skill/
 │       ├── SKILL.md               ← entry: triggers + routing table + loading rules
 │       ├── BUILD_MANIFEST.json    ← build manifest and file hashes
+│       ├── test-prompts.json      ← trigger cases for this entry (11)
 │       └── references/
 │           ├── overview.md        ← whole-book overview
 │           ├── capability-index.md  ← full intent and keyword index
@@ -152,29 +162,35 @@ jp-candlestick-analysis-skill/
 │   │   ├── SKILL.md               ← source router entry
 │   │   └── references/            ← 27 cards + index / cheatsheet / glossary / overview
 │   ├── stop-reward-risk-skill/
-│   │   └── SKILL.md               ← one file, the whole card
+│   │   ├── SKILL.md               ← one file, the whole card
+│   │   └── test-prompts.json      ← trigger cases for this skill (10)
 │   ├── price-target-retracement-skill/
-│   │   └── SKILL.md
+│   │   ├── SKILL.md
+│   │   └── test-prompts.json
 │   ├── window-gap-management-skill/
-│   │   └── SKILL.md
+│   │   ├── SKILL.md
+│   │   └── test-prompts.json
 │   ├── support-resistance-system-skill/
-│   │   └── SKILL.md
+│   │   ├── SKILL.md
+│   │   └── test-prompts.json
 │   └── kagi-chart-skill/
-│       └── SKILL.md
-└── evals/                          ← test material from the generation process
-    ├── test-results.md             ← item-by-item scoring and rework log
-    ├── test-prompts__jp-candlestick-analysis-skill.json
-    ├── test-prompts__stop-reward-risk.json
-    ├── test-prompts__price-target-retracement.json
-    ├── test-prompts__window-gap-management.json
-    ├── test-prompts__support-resistance-system.json
-    ├── test-prompts__kagi-chart-skill.json
-    ├── output-tasks__C01-C14.json
-    ├── output-tasks__C15-C27.json
-    ├── output-assertions__C01-C14.json
-    ├── output-assertions__C15-C27.json
-    ├── all_skills_list.json
-    └── router_cards_list.json
+│       ├── SKILL.md
+│       └── test-prompts.json
+├── evals/                          ← test material from the generation process
+│   ├── test-results.md             ← item-by-item scoring and rework log
+│   ├── test-prompts__jp-candlestick-analysis-skill.json
+│   ├── test-prompts__stop-reward-risk.json
+│   ├── test-prompts__price-target-retracement.json
+│   ├── test-prompts__window-gap-management.json
+│   ├── test-prompts__support-resistance-system.json
+│   ├── test-prompts__kagi-chart-skill.json
+│   ├── output-tasks__C01-C14.json
+│   ├── output-tasks__C15-C27.json
+│   ├── output-assertions__C01-C14.json
+│   ├── output-assertions__C15-C27.json
+│   ├── all_skills_list.json
+│   └── router_cards_list.json
+└── rejected/                       ← empty directory (no rejected candidates at stage 1.5; kept as placeholder)
 ```
 
 ## Usage
