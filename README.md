@@ -112,7 +112,7 @@ pack 里被晋级为独立 skill 的 5 张卡：
 
 ## 测试与验证
 
-本仓库连生成过程的测试材料一起发布：`evals/` 下是六个入口的触发用例（`test-prompts__*.json`）、输出评测的任务与断言（`output-tasks__*` / `output-assertions__*`）以及逐项评分记录 `test-results.md`——包含失败与回炉修复的完整过程，不是只留通过记录。
+本仓库连生成过程的测试材料一起发布：触发用例在各 skill 目录的 `test-prompts.json` 里，逐项评分记录在根目录的 `test-results.md`——包含失败与回炉修复的完整过程，不是只留通过记录。
 
 - **触发盲测**：should_trigger 25 / 25、should_not_trigger 18 / 18；另有 18 条 edge 用例，其中 15 条直接通过、2 条由入口以正确行为承接、1 条修 skill 后复测
 - **输出评测**：27 个单元 × normal / boundary 两个场景，共 54 个场景。首轮 52 / 54 PASS（断言 252 / 255，98.8%），2 个失败（砖形图、钥匙图）经回炉修卡后回归全过，最终 54 / 54
@@ -123,74 +123,31 @@ pack 里被晋级为独立 skill 的 5 张卡：
 
 ```text
 jp-candlestick-analysis-skill/
-├── README.md                      ← 你正在看的（中文）
-├── README.en.md                   ← English version
-├── LICENSE                        ← MIT
-├── GITHUB_REPO.md                 ← GitHub 仓库元信息（名称 / 描述 / topics）
-├── BOOK_OVERVIEW.md               ← 整书理解（Adler 四步拆解，阶段 0 产出）
-├── verified.md                    ← 27 个规范单元的三重验证结论
-├── INDEX.md                       ← skill 地图（能力总表 + 依赖关系 + 加载顺序）
-├── TEST_SUMMARY.md                ← 阶段 4 压力测试摘要（测试范围 / 结构检查 / 结果）
-├── CANGJIE_ADAPTATION.md          ← 仓颉适配说明（文本状态 / 蒸馏目标 / 证据规则 / 使用边界）
-├── bundle/                        ← 能力卡源（本次蒸馏的唯一真源）
-│   ├── verified.yaml              ← 27 个能力的规范化定义（slug / 判据 / 去向）
-│   ├── cards/                     ← 27 张能力卡，文件名统一以 -skill.md 结尾
-│   └── book/
-│       ├── overview.md            ← 整书概览
-│       └── glossary.md            ← 术语表
-├── candidates/                    ← 阶段 1 提取候选池（331 条，三重验证前的原始记录）
-│   ├── frameworks.md              ← 框架候选 45 条
-│   ├── principles.md              ← 原则候选 124 条
-│   ├── cases.md                   ← 案例候选 40 条
-│   ├── counter-examples.md        ← 反例候选 35 条
-│   └── glossary.md                ← 术语候选 87 条
-├── single/                        ← 单一入口模式
-│   └── jp-candlestick-analysis-skill/
-│       ├── SKILL.md               ← 入口：触发条件 + 路由表 + 加载规则
-│       ├── BUILD_MANIFEST.json    ← 编译清单与文件哈希
-│       ├── test-prompts.json      ← 本入口的触发用例（11 条）
-│       └── references/
-│           ├── overview.md        ← 整书概览
-│           ├── capability-index.md  ← 完整意图与关键词索引
-│           ├── cheatsheet.md      ← 决策规则速查
-│           ├── glossary.md        ← 术语表
-│           └── capabilities/      ← 27 张能力卡
-├── pack/                          ← 多入口模式（compact pack）
-│   ├── BUILD_MANIFEST.json
-│   ├── capability-destinations.json
-│   ├── jp-candlestick-analysis-skill-router/
-│   │   ├── SKILL.md               ← 来源路由入口
-│   │   └── references/            ← 27 张卡 + 索引 / 速查 / 术语 / 概览
-│   ├── stop-reward-risk-skill/
-│   │   ├── SKILL.md               ← 单文件即完整能力卡
-│   │   └── test-prompts.json      ← 本 skill 的触发用例（10 条）
-│   ├── price-target-retracement-skill/
-│   │   ├── SKILL.md
-│   │   └── test-prompts.json
-│   ├── window-gap-management-skill/
-│   │   ├── SKILL.md
-│   │   └── test-prompts.json
-│   ├── support-resistance-system-skill/
-│   │   ├── SKILL.md
-│   │   └── test-prompts.json
-│   └── kagi-chart-skill/
-│       ├── SKILL.md
-│       └── test-prompts.json
-├── evals/                          ← 生成过程的测试材料
-│   ├── test-results.md             ← 逐项评分与回炉修复记录
-│   ├── test-prompts__jp-candlestick-analysis-skill.json
-│   ├── test-prompts__stop-reward-risk.json
-│   ├── test-prompts__price-target-retracement.json
-│   ├── test-prompts__window-gap-management.json
-│   ├── test-prompts__support-resistance-system.json
-│   ├── test-prompts__kagi-chart-skill.json
-│   ├── output-tasks__C01-C14.json
-│   ├── output-tasks__C15-C27.json
-│   ├── output-assertions__C01-C14.json
-│   ├── output-assertions__C15-C27.json
-│   ├── all_skills_list.json
-│   └── router_cards_list.json
-└── rejected/                       ← 空目录（阶段 1.5 无 rejected 候选，保留占位）
+├── README.md              ← 你正在看的
+├── README.en.md           ← English version
+├── LICENSE                ← MIT
+├── BOOK_OVERVIEW.md       ← 阶段 0 产出：全书 Adler 分析
+├── INDEX.md               ← 阶段 3 产出：skill 总览 + 依赖关系
+├── verified.md            ← 通过三重验证的 27 个单元
+├── TEST_SUMMARY.md        ← 阶段 4 产出：压力测试摘要
+├── CANGJIE_ADAPTATION.md  ← 仓颉适配说明
+├── GITHUB_REPO.md         ← 仓库元数据
+├── test-results.md        ← 测试结果记录
+├── candidates/            ← 阶段 1 产出：原始候选池
+│   ├── frameworks.md      ← 框架与方法候选
+│   ├── principles.md      ← 原则 / 规则 / 计算候选
+│   ├── cases.md           ← 书中案例候选
+│   ├── counter-examples.md← 反例与边界候选
+│   └── glossary.md        ← 术语候选
+├── rejected/              ← 阶段 1.5 产出：被淘汰的单元 + 原因
+├── bundle/                ← 编译事实源
+│   ├── verified.yaml      ← 能力元数据、判据与去向
+│   ├── cards/             ← 能力卡源文件（六段结构）
+│   └── book/              ← overview.md + glossary.md
+├── single/                ← single 模式（1 个入口 + 全部能力卡）
+│   └── jp-candlestick-analysis-skill/SKILL.md  ← 入口：触发 + 路由表 + 加载规则
+└── pack/                  ← pack 模式（1 个路由入口 + 5 个晋级 skill）
+    └── */SKILL.md         ← 6 个 skill，每个附带 test-prompts.json
 ```
 
 ## 如何使用

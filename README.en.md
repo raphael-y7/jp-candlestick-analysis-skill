@@ -112,7 +112,7 @@ The relationship between the two books also shapes the distillation: one is the 
 
 ## Testing and verification
 
-This repository publishes the test material from the generation process alongside the skills: `evals/` holds trigger cases for the six entries (`test-prompts__*.json`), the output-evaluation tasks and assertions (`output-tasks__*` / `output-assertions__*`), and the item-by-item scoring log `test-results.md` — including the failures and the rework, not just the passes.
+This repository publishes the test material from the generation process alongside the skills: the trigger cases live in each skill directory's `test-prompts.json`, and the item-by-item scoring log is `test-results.md` at the repository root — including the failures and the rework, not just the passes.
 
 - **Trigger blind tests**: should_trigger 25 / 25, should_not_trigger 18 / 18; plus 18 edge cases — 15 passed directly, 2 were handled correctly by the entry, 1 was fixed and re-tested
 - **Output evaluation**: 27 units × normal / boundary = 54 scenarios. The first round scored 52 / 54 (252 / 255 assertions, 98.8%); the two failures (Renko chart, Kagi chart) were fixed in the cards and passed on regression, ending at 54 / 54
@@ -123,74 +123,31 @@ This repository publishes the test material from the generation process alongsid
 
 ```text
 jp-candlestick-analysis-skill/
-├── README.md                      ← Chinese version
-├── README.en.md                   ← you are reading this
-├── LICENSE                        ← MIT
-├── GITHUB_REPO.md                 ← GitHub repo metadata (name / description / topics)
-├── BOOK_OVERVIEW.md               ← whole-book comprehension (Adler four-step, stage 0 output)
-├── verified.md                    ← triple-verification conclusions for the 27 canonical units
-├── INDEX.md                       ← skill map (capability table + dependencies + loading order)
-├── TEST_SUMMARY.md                ← stage 4 stress-test summary (scope / structure checks / results)
-├── CANGJIE_ADAPTATION.md          ← cangjie adaptation notes (text state / goals / evidence rules / limits)
-├── bundle/                        ← card source (single source of truth for this distillation)
-│   ├── verified.yaml              ← canonical definitions of the 27 capabilities (slug / criteria / destination)
-│   ├── cards/                     ← 27 capability cards, filenames all end with -skill.md
-│   └── book/
-│       ├── overview.md            ← whole-book overview
-│       └── glossary.md            ← glossary
-├── candidates/                    ← stage 1 extraction pool (331 items, before triple verification)
-│   ├── frameworks.md              ← 45 framework candidates
-│   ├── principles.md              ← 124 principle candidates
-│   ├── cases.md                   ← 40 case candidates
-│   ├── counter-examples.md        ← 35 counter-example candidates
-│   └── glossary.md                ← 87 glossary candidates
-├── single/                        ← single-entry build
-│   └── jp-candlestick-analysis-skill/
-│       ├── SKILL.md               ← entry: triggers + routing table + loading rules
-│       ├── BUILD_MANIFEST.json    ← build manifest and file hashes
-│       ├── test-prompts.json      ← trigger cases for this entry (11)
-│       └── references/
-│           ├── overview.md        ← whole-book overview
-│           ├── capability-index.md  ← full intent and keyword index
-│           ├── cheatsheet.md      ← decision-rule quick reference
-│           ├── glossary.md        ← glossary
-│           └── capabilities/      ← 27 capability cards
-├── pack/                          ← multi-entry build (compact pack)
-│   ├── BUILD_MANIFEST.json
-│   ├── capability-destinations.json
-│   ├── jp-candlestick-analysis-skill-router/
-│   │   ├── SKILL.md               ← source router entry
-│   │   └── references/            ← 27 cards + index / cheatsheet / glossary / overview
-│   ├── stop-reward-risk-skill/
-│   │   ├── SKILL.md               ← one file, the whole card
-│   │   └── test-prompts.json      ← trigger cases for this skill (10)
-│   ├── price-target-retracement-skill/
-│   │   ├── SKILL.md
-│   │   └── test-prompts.json
-│   ├── window-gap-management-skill/
-│   │   ├── SKILL.md
-│   │   └── test-prompts.json
-│   ├── support-resistance-system-skill/
-│   │   ├── SKILL.md
-│   │   └── test-prompts.json
-│   └── kagi-chart-skill/
-│       ├── SKILL.md
-│       └── test-prompts.json
-├── evals/                          ← test material from the generation process
-│   ├── test-results.md             ← item-by-item scoring and rework log
-│   ├── test-prompts__jp-candlestick-analysis-skill.json
-│   ├── test-prompts__stop-reward-risk.json
-│   ├── test-prompts__price-target-retracement.json
-│   ├── test-prompts__window-gap-management.json
-│   ├── test-prompts__support-resistance-system.json
-│   ├── test-prompts__kagi-chart-skill.json
-│   ├── output-tasks__C01-C14.json
-│   ├── output-tasks__C15-C27.json
-│   ├── output-assertions__C01-C14.json
-│   ├── output-assertions__C15-C27.json
-│   ├── all_skills_list.json
-│   └── router_cards_list.json
-└── rejected/                       ← empty directory (no rejected candidates at stage 1.5; kept as placeholder)
+├── README.md              ← Chinese version
+├── README.en.md           ← you are reading this
+├── LICENSE                ← MIT
+├── BOOK_OVERVIEW.md       ← stage 0 output: Adler whole-book analysis
+├── INDEX.md               ← stage 3 output: skill map + dependencies
+├── verified.md            ← 27 units that passed triple verification
+├── TEST_SUMMARY.md        ← stage 4 output: stress-test summary
+├── CANGJIE_ADAPTATION.md  ← cangjie adaptation notes
+├── GITHUB_REPO.md         ← repository metadata
+├── test-results.md        ← test result records
+├── candidates/            ← stage 1 output: raw candidate pool
+│   ├── frameworks.md      ← framework and method candidates
+│   ├── principles.md      ← principle / rule / calculation candidates
+│   ├── cases.md           ← case candidates from the book
+│   ├── counter-examples.md← counter-example and boundary candidates
+│   └── glossary.md        ← terminology candidates
+├── rejected/              ← stage 1.5 output: rejected units + reasons
+├── bundle/                ← compilation source of truth
+│   ├── verified.yaml      ← capability metadata, criteria and destinations
+│   ├── cards/             ← capability card sources (six sections)
+│   └── book/              ← overview.md + glossary.md
+├── single/                ← single-mode build (one entry + all capability cards)
+│   └── jp-candlestick-analysis-skill/SKILL.md  ← entry: triggers + routing table + loading rules
+└── pack/                  ← pack-mode build (one router + 5 promoted skills)
+    └── */SKILL.md         ← 6 skills, each shipping a test-prompts.json
 ```
 
 ## Usage
